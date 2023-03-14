@@ -128,9 +128,9 @@
             <img class="card-img-left flex-auto d-none d-md-block" height="250" width="160" src="https://storage.cloud.google.com/newsbucketnm/primary/business-img3.jpg" alt="Card image cap">
             <div class="card-body d-flex flex-column align-items-start">
               <h3 class="card-title mb-0">Business Daily</h3>
-              <p class="card-text mb-auto">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis commodo odio aenean sed.
-              </p>
+              <div class="card-text mb-auto" id="business">
+                
+              </div>
               <a href="post-01.html" class="btn btn-outline-secondary">Read more</a>
             </div>
           </div>
@@ -139,9 +139,9 @@
             <img class="card-img-left flex-auto d-none d-md-block" height="250" width="200" src="https://storage.cloud.google.com/newsbucketnm/primary/tech-img3.jpg" alt="Card image cap">
             <div class="card-body d-flex flex-column align-items-start">
               <h3 class="card-title mb-0">Tech Latest</h3>
-              <p class="card-text mb-auto">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis commodo odio aenean sed.
-              </p>
+              <div class="card-text mb-auto" id="tech">
+                
+              </div>
               <a href="post-02.html" class="btn btn-outline-secondary">Read more</a>
             </div>
           </div>
@@ -150,8 +150,8 @@
             <img class="card-img-left flex-auto d-none d-md-block" height="250" width="170" src="https://storage.cloud.google.com/newsbucketnm/primary/sports-img2.jpg" alt="Card image cap">
             <div class="card-body d-flex flex-column align-items-start">
               <h3 class="card-title mb-0">Sport</h3>
-              <p class="card-text mb-auto">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis commodo odio aenean sed.
+              <p class="card-text mb-auto" id="sport">
+                
               </p>
               <a href="post-03.html" class="btn btn-outline-secondary">Read more</a>
             </div>
@@ -161,8 +161,8 @@
             <img class="card-img-left flex-auto d-none d-md-block" height="250" src="https://storage.cloud.google.com/newsbucketnm/primary/joke-img3.png" alt="Card image cap">
             <div class="card-body d-flex flex-column align-items-start">
               <h3 class="card-title mb-0">Jokes of the Day</h3>
-              <p class="card-text mb-auto">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis commodo odio aenean sed.
+              <p class="card-text mb-auto" id="anyJokeh">
+                
               </p>
               <a href="post-03.html" class="btn btn-outline-secondary">Read more</a>
             </div>
@@ -234,6 +234,103 @@
   <!-- Bootstrap.min.js -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
+   <!-- getting head line text-->
+   <script>	
+    var baseUrl = "http://34.83.169.66:8072/freenews/business/first/article";
+    function firstText() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET",baseUrl,true);
+      xmlhttp.onreadystatechange = function(){
+        if(xmlhttp.readyState ===4 && xmlhttp.status ===200){
+          var persons = JSON.parse(xmlhttp.responseText);
+          var tbltop = `<table align="center">`;
+          //main table content we fill from data from the rest call
+          var main ="";
+            main += "<tr><td>"+persons.title+"</td></tr>"+
+            "<tr><td>"+persons.content+"</td></tr>";
+          var tblbottom = "</table>";
+          var tbl = tbltop + main + tblbottom;
+          document.getElementById("business").innerHTML = tbl;
+        }
+      };
+      xmlhttp.send();
+    }
+
+    var baseUrlt = "http://34.83.169.66:8072/freenews/tech/first/article";
+    function firstTText() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET",baseUrlt,true);
+      xmlhttp.onreadystatechange = function(){
+        if(xmlhttp.readyState ===4 && xmlhttp.status ===200){
+          var persons = JSON.parse(xmlhttp.responseText);
+          var tbltop = `<table align="center">`;
+          //main table content we fill from data from the rest call
+          var main ="";
+            main += "<tr><td>"+persons.title+"</td></tr>"+
+            "<tr><td>"+persons.content+"</td></tr>";
+          var tblbottom = "</table>";
+          var tbl = tbltop + main + tblbottom;
+          document.getElementById("tech").innerHTML = tbl;
+        }
+      };
+      xmlhttp.send();
+    }
+
+    var baseUrlsp = "http://34.83.169.66:8072/freenews/sport/first/article";
+    function firstSText() {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET",baseUrlsp,true);
+      xmlhttp.onreadystatechange = function(){
+        if(xmlhttp.readyState ===4 && xmlhttp.status ===200){
+          var persons = JSON.parse(xmlhttp.responseText);
+          var tbltop = `<table align="center">`;
+          //main table content we fill from data from the rest call
+          var main ="";
+            main += "<tr><td>"+persons.title+"</td></tr>"+
+            "<tr><td>"+persons.content+"</td></tr>";
+          var tblbottom = "</table>";
+          var tbl = tbltop + main + tblbottom;
+          document.getElementById("sport").innerHTML = tbl;
+        }
+      };
+      xmlhttp.send();
+    }
+
+    var baseUrlj = "https://v2.jokeapi.dev/joke/";
+		function aJoke() {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET",baseUrlj+'/any?blacklistFlags=racist&type=twopart',true);
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.readyState ===4 && xmlhttp.status ===200){
+					var persons = JSON.parse(xmlhttp.responseText);
+					var tbltop = `<table align="center" style="width:100%">`;
+					//main table content we fill from data from the rest call
+					var main ="";
+					
+					main += "<tr><td>"+persons.category+"</td><td>"+persons.setup+"</td><td>"+persons.delivery+"</td></tr>";
+					
+					var tblbottom = "</table>";
+					var tbl = tbltop + main + tblbottom;
+					document.getElementById("anyJokeh").innerHTML = tbl;
+				}
+			};
+			xmlhttp.send();
+		}
+
+
+    window.onload = function(){
+      firstText();
+      firstTText();
+      firstSText();
+      aJoke()
+    }
+  </script>
+
+    <script>	
+
+    
+   
+    </script>
 </body>
 
 </html>
